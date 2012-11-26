@@ -17,7 +17,7 @@ Commands
 
 **sw**
 
-###Change into persistent working direcotry###
+###Change current working directory into persistent working direcotry###
 
 **gw**
 
