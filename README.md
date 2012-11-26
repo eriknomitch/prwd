@@ -15,15 +15,15 @@ Commands
 
 **sw**
 
-*Set persistent working directory*
+*Sets the persistent working directory*
 
 **gw**
 
-*Change current working directory into persistent working direcotry*
+*Changes the shell's current working directory into the persistent working direcotry*
 
 **lw**
 
-*Print persistent working directory*
+*Prints the persistent working directory*
 
 Credits
 -------
