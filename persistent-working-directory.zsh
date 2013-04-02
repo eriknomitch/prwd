@@ -18,7 +18,9 @@ function sw()
   fi
 
   # Destroy the target if it exists
-  sed -i "/^$_target:.*$/d" $WORKING_DIRECTORY_FILE
+  if [[ -e $WORKING_DIRECTORY_FILE ]] ; then
+    sed -i "/^$_target:.*$/d" $WORKING_DIRECTORY_FILE
+  fi
 
   # Add it to the working directory file
   echo "$_target:$PWD" >> $WORKING_DIRECTORY_FILE
