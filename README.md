@@ -13,17 +13,17 @@ Clone the repository to `~/.persistent-working-directory` and add `source $HOME/
 Commands
 --------
 
-###Set persistent working directory###
-
 **sw**
 
-###Change current working directory into persistent working direcotry###
+*Sets the persistent working directory*
 
 **gw**
 
-###Print persistent working directory###
+*Changes the shell's current working directory into the persistent working direcotry*
 
 **lw**
+
+*Prints the persistent working directory*
 
 Credits
 -------
