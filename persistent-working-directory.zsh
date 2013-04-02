@@ -14,7 +14,6 @@ function sw()
 
   # Default to 0
   if [[ -z $_target ]] ; then
-    echo "setting target to 0"
     _target=0
   fi
 
@@ -40,5 +39,11 @@ function gw()
     clear
     cd `cat $WORKING_DIRECTORY_FILE | grep -E "^$_target:" | sed "s/^$_target://"`
   fi
+}
+
+# Clear working directory file
+function cw()
+{
+  rm $WORKING_DIRECTORY_FILE
 }
 
