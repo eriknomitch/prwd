@@ -19,7 +19,13 @@ function sw()
 
   # Destroy the target if it exists
   if [[ -e $WORKING_DIRECTORY_FILE ]] ; then
-    sed -i "/^$_target:.*$/d" $WORKING_DIRECTORY_FILE
+
+    # OS X sed is different and takes a preliminary "backup" arg
+    if [[ `uname` == "Darwin" ]] ; then
+      sed -i "" "/^$_target:.*$/d" $WORKING_DIRECTORY_FILE
+    else
+      sed -i "/^$_target:.*$/d" $WORKING_DIRECTORY_FILE
+    fi
   fi
 
   # Add it to the working directory file
