@@ -35,11 +35,16 @@ function lw()
 function sw()
 {
   _target=$1
-  _workspace=`_current_workspace`
+  _workspace=$2
 
-  # Default to 0
+  # Default to 0 for target
   if [[ -z $_target ]] ; then
     _target=0
+  fi
+  
+  # Default to 0 for workspace
+  if [[ -z $_workspace ]] ; then
+    _workspace=0
   fi
 
   # Destroy the target if it exists
