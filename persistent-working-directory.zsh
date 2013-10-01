@@ -65,8 +65,6 @@ function gw()
     _workspace=0
   fi
 
-  echo $_workspace
-
   # Default to 0 if target was not passed
   if [[ -z $_target ]] ; then
     _target=0
