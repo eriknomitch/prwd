@@ -3,17 +3,21 @@
 # ================================================
 
 # ------------------------------------------------
-# CONFIGURATION ----------------------------------
+# GLOBALS ----------------------------------------
 # ------------------------------------------------
 WORKING_DIRECTORY_FILE=$HOME/.zsh-wd
-BIND_TO_WORKSPACE=true
+
+# If the user has not set PWD_BIND_TO_WORKSPACE, default to false.
+if [[ -z $PWD_BIND_TO_WORKSPACE ]] ; then
+  PWD_BIND_TO_WORKSPACE=false
+fi
 
 # ------------------------------------------------
 # UTILITY ----------------------------------------
 # ------------------------------------------------
 function _current_workspace()
 {
-  if ( $BIND_TO_WORKSPACE ) ; then
+  if ( $PWD_BIND_TO_WORKSPACE ) ; then
     wmctrl -d | grep "*" | awk '{print $1}'
   else
     echo 0
@@ -66,7 +70,7 @@ function gw()
   fi
 
   # Default to 0 if we aren't binding to workspaces
-  if ( $BIND_TO_WORKSPACE ) ; then
+  if ( $PWD_BIND_TO_WORKSPACE ) ; then
     _workspace=`_current_workspace`
   fi
 
@@ -84,4 +88,13 @@ function cw()
 {
   rm $WORKING_DIRECTORY_FILE
 }
+
+# ------------------------------------------------
+# MAIN -------------------------------------------
+# ------------------------------------------------
+
+# Create the file and set a default working directory (HOME)
+if [[ ! -f $WORKING_DIRECTORY_FILE ]] ; then
+  echo "0:0:$HOME" >> $WORKING_DIRECTORY_FILE
+fi
 
