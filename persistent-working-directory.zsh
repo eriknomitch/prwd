@@ -58,16 +58,16 @@ function sw()
 function gw()
 {
   _target=$1
-
-  if ( $BIND_TO_WORKSPACE ) ; then
-    _workspace=`_current_workspace`
-  else
-    _workspace=0
-  fi
-
+  _workspace=0
+  
   # Default to 0 if target was not passed
   if [[ -z $_target ]] ; then
     _target=0
+  fi
+
+  # Default to 0 if we aren't binding to workspaces
+  if ( $BIND_TO_WORKSPACE ) ; then
+    _workspace=`_current_workspace`
   fi
 
   if [[ -e $WORKING_DIRECTORY_FILE ]] ; then
