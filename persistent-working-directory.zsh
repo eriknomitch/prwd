@@ -37,12 +37,10 @@ function sw()
   _target=$1
   _workspace=$2
 
-  # Default to 0 for target
   if [[ -z $_target ]] ; then
     _target=0
   fi
   
-  # Default to 0 for workspace
   if [[ -z $_workspace ]] ; then
     _workspace=`_current_workspace`
   fi
@@ -52,9 +50,9 @@ function sw()
 
     # OS X sed is different and takes a preliminary "backup" arg
     if [[ `uname` == "Darwin" ]] ; then
-      sed -i "" "/^$_target:[0-9]:.*$/d" $WORKING_DIRECTORY_FILE
+      sed -i "" "/^$_target:$_workspace:.*$/d" $WORKING_DIRECTORY_FILE
     else
-      sed -i "/^$_target:[0-9]:.*$/d" $WORKING_DIRECTORY_FILE
+      sed -i "/^$_target:$_workspace:.*$/d" $WORKING_DIRECTORY_FILE
     fi
   fi
 
