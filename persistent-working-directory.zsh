@@ -94,12 +94,16 @@ function cw()
   rm $WORKING_DIRECTORY_FILE
 }
 
+function _ensure_default_working_directory_file()
+{
+  # Create the file and set a default working directory (HOME)
+  if [[ ! -f $WORKING_DIRECTORY_FILE ]] ; then
+    echo "0:0:$HOME" >> $WORKING_DIRECTORY_FILE
+  fi
+}
+
 # ------------------------------------------------
 # MAIN -------------------------------------------
 # ------------------------------------------------
-
-# Create the file and set a default working directory (HOME)
-if [[ ! -f $WORKING_DIRECTORY_FILE ]] ; then
-  echo "0:0:$HOME" >> $WORKING_DIRECTORY_FILE
-fi
+_ensure_default_working_directory_file
 
