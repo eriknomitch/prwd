@@ -103,5 +103,5 @@ function _ensure_default_working_directory_file()
 # ------------------------------------------------
 # MAIN -------------------------------------------
 # ------------------------------------------------
-_ensure_default_working_directory_file
+#_ensure_default_working_directory_file
 
