@@ -44,7 +44,7 @@ function sw()
   
   # Default to 0 for workspace
   if [[ -z $_workspace ]] ; then
-    _workspace=0
+    _workspace=`_current_workspace`
   fi
 
   # Destroy the target if it exists
