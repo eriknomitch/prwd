@@ -89,8 +89,12 @@ function gw()
 # Clear working directory file
 function cw()
 {
-  rm $WORKING_DIRECTORY_FILE
-  echo "Cleared persistent working directories."
+  if [[ -f $WORKING_DIRECTORY_FILE ]] ; then
+    rm $WORKING_DIRECTORY_FILE
+    echo "Cleared persistent working directories."
+  else
+    echo "No persistent working directory file to clear."
+  fi
 }
 
 function _ensure_default_working_directory_file()
