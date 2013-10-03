@@ -90,6 +90,7 @@ function gw()
 function cw()
 {
   rm $WORKING_DIRECTORY_FILE
+  echo "Cleared persistent working directories."
 }
 
 function _ensure_default_working_directory_file()
