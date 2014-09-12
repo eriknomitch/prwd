@@ -17,7 +17,10 @@ fi
 # ------------------------------------------------
 function _current_workspace()
 {
-  if ( $PWD_BIND_TO_WORKSPACE ) ; then
+  # Clients SSHed here get their own workspace
+  if ( env | grep -q "^SSH_CLIENT=" ) ; then
+    echo "ssh"
+  elif ( $PWD_BIND_TO_WORKSPACE ) ; then
     wmctrl -d | grep "*" | awk '{print $1}'
   else
     echo 0
@@ -40,7 +43,7 @@ function sw()
   if [[ -z $_target ]] ; then
     _target=0
   fi
-  
+
   if [[ -z $_workspace ]] ; then
     _workspace=`_current_workspace`
   fi
