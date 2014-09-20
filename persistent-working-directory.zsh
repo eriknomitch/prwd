@@ -83,9 +83,7 @@ function gw()
   if [[ -e $WORKING_DIRECTORY_FILE ]] ; then
     clear
 
-    _directory=`cat $WORKING_DIRECTORY_FILE | grep -E "^$_target:$_workspace" | sed "s/^$_target:$_workspace://"`
-
-    cd $_directory
+    cd `cat $WORKING_DIRECTORY_FILE | grep -E "^$_target:$_workspace" | sed "s/^$_target:$_workspace://"`
   fi
 }
 
