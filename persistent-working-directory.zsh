@@ -37,8 +37,8 @@ function lw()
 
 function sw()
 {
-  _target=$1
-  _workspace=$2
+  local _target=$1
+  local _workspace=$2
 
   if [[ -z $_target ]] ; then
     _target=0
@@ -67,8 +67,8 @@ function sw()
 
 function gw()
 {
-  _target=$1
-  _workspace=0
+  local _target=$1
+  local _workspace=0
   
   # Default to 0 if target was not passed
   if [[ -z $_target ]] ; then
