@@ -88,8 +88,7 @@ function gw()
     _directory=`cat $WORKING_DIRECTORY_FILE | grep -E "^$_target:$_workspace" | sed "s/^$_target:$_workspace://"`
 
     if [[ -z $_directory ]] ; then
-      echo "Working directory not set for target=$_target workspace=$_workspace. Changing directory to $HOME."
-      cd
+      echo "$0: Working directory not set for target=$_target workspace=$_workspace. Staying in '`pwd`'."
     else
       cd $_directory
     fi
