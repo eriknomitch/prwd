@@ -1,3 +1,0 @@
-#!/bin/zsh
-
-vim `find ./ -iname '*.zsh'` README* vim-all
