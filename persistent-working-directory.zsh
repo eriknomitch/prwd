@@ -89,6 +89,11 @@ function gw()
 
     if [[ -z $_directory ]] ; then
       echo "$0: Working directory not set for target=$_target workspace=$_workspace. Staying in '`pwd`'."
+
+      if ( `(command -v g >/dev/null 2>&1)` ) ; then
+        g
+      fi
+      
     else
       cd $_directory
     fi
