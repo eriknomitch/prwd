@@ -40,6 +40,7 @@ function _get_persistent_working_directory()
 # ------------------------------------------------
 function lw()
 {
+  # List the current working directory
   if [[ $1 == "-c" ]] ; then
 
     _get_persistent_working_directory 0 `_current_workspace`
