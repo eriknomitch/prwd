@@ -42,6 +42,8 @@ function lw()
 {
   if [[ $1 == "-c" ]] ; then
 
+    _get_persistent_working_directory 0 `_current_workspace`
+
   # List entire file
   else
     test -e $WORKING_DIRECTORY_FILE && cat $WORKING_DIRECTORY_FILE | sort
