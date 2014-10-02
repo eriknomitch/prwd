@@ -27,12 +27,25 @@ function _current_workspace()
   fi
 }
 
+function _get_persistent_working_directory()
+{
+  local _target=$1
+  local _workspace=$2
+    
+  cat $WORKING_DIRECTORY_FILE | grep -E "^$_target:$_workspace" | sed "s/^$_target:$_workspace://"
+}
+
 # ------------------------------------------------
 # COMMANDS ---------------------------------------
 # ------------------------------------------------
 function lw()
 {
-  test -e $WORKING_DIRECTORY_FILE && cat $WORKING_DIRECTORY_FILE | sort
+  if [[ $1 == "-c" ]] ; then
+
+  # List entire file
+  else
+    test -e $WORKING_DIRECTORY_FILE && cat $WORKING_DIRECTORY_FILE | sort
+  fi
 }
 
 function sw()
@@ -85,7 +98,7 @@ function gw()
 
     local _directory
 
-    _directory=`cat $WORKING_DIRECTORY_FILE | grep -E "^$_target:$_workspace" | sed "s/^$_target:$_workspace://"`
+    _directory=`_get_persistent_working_directory $_target $_workspace`
 
     if [[ -z $_directory ]] ; then
       echo "$0: Working directory not set for target=$_target workspace=$_workspace. Staying in '`pwd`'."
