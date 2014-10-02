@@ -45,6 +45,11 @@ function lw()
 
     _get_persistent_working_directory 0 `_current_workspace`
 
+  # We want to see a specific workspace
+  elif [[ -n $1 ]] ; then
+
+    _get_persistent_working_directory 0 $1
+
   # List entire file
   else
     test -e $WORKING_DIRECTORY_FILE && cat $WORKING_DIRECTORY_FILE | sort
