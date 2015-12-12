@@ -69,6 +69,14 @@ function gw()
 {
   local _target=$1
   local _workspace=0
+  local _list_target=false
+
+  # Handle --list-target
+  if [[ $_target == "--list-target" ]] ; then
+    shift
+    _target=$1
+    _list_target=true
+  fi
   
   # Default to 0 if target was not passed
   if [[ -z $_target ]] ; then
@@ -81,11 +89,15 @@ function gw()
   fi
 
   if [[ -e $WORKING_DIRECTORY_FILE ]] ; then
+   
+    local _directory=`cat $WORKING_DIRECTORY_FILE | grep -E "^$_target:$_workspace" | sed "s/^$_target:$_workspace://"`
+
+    if ( $_list_target ) ; then
+      echo $_directory
+      return
+    fi
+
     clear
-
-    local _directory
-
-    _directory=`cat $WORKING_DIRECTORY_FILE | grep -E "^$_target:$_workspace" | sed "s/^$_target:$_workspace://"`
 
     if [[ -z $_directory ]] ; then
       echo "$0: Working directory not set for target=$_target workspace=$_workspace. Staying in '`pwd`'."
