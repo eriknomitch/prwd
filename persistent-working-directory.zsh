@@ -92,7 +92,8 @@ function gw()
   local _workspace=0
   local _list_target=false
 
-  # Handle --list-target
+  # Handle --list-target if we just want to list the 
+  # target directory and not actually cd there.
   if [[ $_target == "--list-target" ]] ; then
     shift
     _target=$1
