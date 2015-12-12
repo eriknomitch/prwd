@@ -145,6 +145,13 @@ function cw()
   fi
 }
 
+function pwd-is-wd() {
+  if [[ `pwd` == `gw --list-target` ]] ; then
+    return 0
+  fi
+  return 1
+}
+
 function _ensure_default_working_directory_file()
 {
   # Create the file and set a default working directory (HOME)
