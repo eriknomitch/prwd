@@ -111,7 +111,7 @@ function gw()
 
   if [[ -e $WORKING_DIRECTORY_FILE ]] ; then
    
-    local _directory=`cat $WORKING_DIRECTORY_FILE | grep -E "^$_target:$_workspace" | sed "s/^$_target:$_workspace://"`
+    local _directory=`_get_persistent_working_directory $_target $_workspace`
 
     if ( $_list_target ) ; then
       echo $_directory
@@ -119,7 +119,6 @@ function gw()
     fi
 
     clear
-    directory=`_get_persistent_working_directory $_target $_workspace`
 
     if [[ -z $_directory ]] ; then
       echo "$0: Working directory not set for target=$_target workspace=$_workspace. Staying in '`pwd`'."
