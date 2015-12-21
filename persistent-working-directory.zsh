@@ -122,7 +122,7 @@ function gw()
     clear
 
     if [[ -z $_directory ]] ; then
-      echo "$0: Working directory not set for target=$_target workspace=$_workspace. Staying in '`pwd`'."
+      echo "$0: Working directory not set for target=$_target workspace=$_workspace. Staying in this directory ('$PWD')."
 
       if ( `(command -v g >/dev/null 2>&1)` ) ; then
         g
@@ -131,6 +131,9 @@ function gw()
     else
       cd $_directory
     fi
+  else
+    echo "$0: No directories are set. Staying in this directory ('$PWD')."
+    return
   fi
 }
 
