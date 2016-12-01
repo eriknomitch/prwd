@@ -2,7 +2,7 @@
   "default": {
     "extensions": [".zsh", ".md"],
     "files":      ["ofe.json"],
-    "first_file": "persistent-working-directory.zsh"
+    "first_file": "prwd.zsh"
   },
   "docs": {
     "extensions": [".md"]

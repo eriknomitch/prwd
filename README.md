@@ -8,7 +8,7 @@ Requirements
 
 Installation
 ------------
-Clone the repository to `~/.persistent-working-directory` and add `source $HOME/.persistent-working-directory/persistent-working-directory.zsh` to your `~/.zshrc`.
+Clone the repository to `~/.prwd` and add `source $HOME/.prwd/prwd.zsh` to your `~/.zshrc`.
 
 Commands
 --------
