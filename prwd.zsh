@@ -7,9 +7,9 @@
 # ------------------------------------------------
 WORKING_DIRECTORY_FILE=$HOME/.zsh-wd
 
-# If the user has not set PWD_BIND_TO_WORKSPACE, default to false.
-if [[ -z $PWD_BIND_TO_WORKSPACE ]] ; then
-  PWD_BIND_TO_WORKSPACE=false
+# If the user has not set PRWD_BIND_TO_WORKSPACE, default to false.
+if [[ -z $PRWD_BIND_TO_WORKSPACE ]] ; then
+  PRWD_BIND_TO_WORKSPACE=false
 fi
 
 # If the user has not set PRWD_BIND_TO_TMUX, default to false.
@@ -27,7 +27,7 @@ function _current_workspace()
     echo "ssh"
   elif ( $PRWD_BIND_TO_TMUX ) ; then
    echo $TMUX | \grep -oE "([0-9]*$)"
-  elif ( $PWD_BIND_TO_WORKSPACE ) ; then
+  elif ( $PRWD_BIND_TO_WORKSPACE ) ; then
     wmctrl -d | grep "*" | awk '{print $1}'
   else
     echo 0
@@ -113,7 +113,7 @@ function gw()
   fi
 
   # Default to 0 if we aren't binding to workspaces
-  if ( $PWD_BIND_TO_WORKSPACE || $PRWD_BIND_TO_TMUX ) ; then
+  if ( $PRWD_BIND_TO_WORKSPACE || $PRWD_BIND_TO_TMUX ) ; then
     _workspace=`_current_workspace`
   fi
 
