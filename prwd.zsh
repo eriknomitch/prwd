@@ -12,6 +12,11 @@ if [[ -z $PWD_BIND_TO_WORKSPACE ]] ; then
   PWD_BIND_TO_WORKSPACE=false
 fi
 
+# If the user has not set PRWD_BIND_TO_TMUX, default to false.
+if [[ -z $PRWD_BIND_TO_TMUX ]] ; then
+  PRWD_BIND_TO_TMUX=false
+fi
+
 # ------------------------------------------------
 # UTILITY ----------------------------------------
 # ------------------------------------------------
@@ -20,6 +25,8 @@ function _current_workspace()
   # Clients SSHed here get their own workspace
   if ( env | grep -q "^SSH_CLIENT=" ) ; then
     echo "ssh"
+  elif ( $PRWD_BIND_TO_TMUX ) ; then
+   echo $TMUX | \grep -oE "([0-9]*$)"
   elif ( $PWD_BIND_TO_WORKSPACE ) ; then
     wmctrl -d | grep "*" | awk '{print $1}'
   else
@@ -106,7 +113,7 @@ function gw()
   fi
 
   # Default to 0 if we aren't binding to workspaces
-  if ( $PWD_BIND_TO_WORKSPACE ) ; then
+  if ( $PWD_BIND_TO_WORKSPACE || $PRWD_BIND_TO_TMUX ) ; then
     _workspace=`_current_workspace`
   fi
 
