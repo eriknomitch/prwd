@@ -20,15 +20,25 @@ fi
 # ------------------------------------------------
 # UTILITY ----------------------------------------
 # ------------------------------------------------
+function _in_tmux() {
+  if [[ $TMUX == "" ]] ; then
+    return 1
+  fi
+  return 0
+}
+
 function _current_workspace()
 {
   # Clients SSHed here get their own workspace
   if ( env | grep -q "^SSH_CLIENT=" ) ; then
     echo "ssh"
-  elif ( $PRWD_BIND_TO_TMUX ) ; then
-   echo $TMUX | \grep -oE "([0-9]*$)"
+  # If the config is set to bind within tmux and we're in a tmux...
+  elif ( $PRWD_BIND_TO_TMUX && `_in_tmux` ) ; then
+    echo $TMUX | \grep -oE "([0-9]*$)"
+  # If the config is set to bind to a workspace...
   elif ( $PRWD_BIND_TO_WORKSPACE ) ; then
     wmctrl -d | grep "*" | awk '{print $1}'
+  # Otherwise we're "always on 0"
   else
     echo 0
   fi
