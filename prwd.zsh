@@ -21,10 +21,7 @@ fi
 # UTILITY ----------------------------------------
 # ------------------------------------------------
 function _in_tmux() {
-  if [[ $TMUX == "" ]] ; then
-    return 1
-  fi
-  return 0
+  test -z $TMUX
 }
 
 function _current_workspace()
@@ -48,7 +45,7 @@ function _get_persistent_working_directory()
 {
   local _target=$1
   local _workspace=$2
-    
+
   cat $WORKING_DIRECTORY_FILE | grep -E "^$_target:$_workspace" | sed "s/^$_target:$_workspace://"
 }
 
@@ -90,10 +87,11 @@ function sw()
   if [[ -e $WORKING_DIRECTORY_FILE ]] ; then
 
     # OS X sed is different and takes a preliminary "backup" arg
-    if [[ `uname` == "Darwin" ]] ; then
-      sed -i "" "/^$_target:$_workspace:.*$/d" $WORKING_DIRECTORY_FILE
-    else
+    # but the user could have GNU sed installed.
+    if sed --help | grep "sed \(GNU sed\)" > /dev/null 2>%1 ; then
       sed -i "/^$_target:$_workspace:.*$/d" $WORKING_DIRECTORY_FILE
+    else
+      sed -i "" "/^$_target:$_workspace:.*$/d" $WORKING_DIRECTORY_FILE
     fi
   fi
 
