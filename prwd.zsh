@@ -21,7 +21,10 @@ fi
 # UTILITY ----------------------------------------
 # ------------------------------------------------
 function _in_tmux() {
-  test -z $TMUX
+  if test -z $TMUX; then
+    return 1
+  fi
+  return 0
 }
 
 function _current_workspace()
@@ -85,14 +88,15 @@ function sw()
 
   # Destroy the target if it exists
   if [[ -e $WORKING_DIRECTORY_FILE ]] ; then
+    sed -i "/^$_target:$_workspace:.*$/d" $WORKING_DIRECTORY_FILE
 
     # OS X sed is different and takes a preliminary "backup" arg
     # but the user could have GNU sed installed.
-    if sed --help | grep "sed \(GNU sed\)" > /dev/null 2>%1 ; then
-      sed -i "/^$_target:$_workspace:.*$/d" $WORKING_DIRECTORY_FILE
-    else
-      sed -i "" "/^$_target:$_workspace:.*$/d" $WORKING_DIRECTORY_FILE
-    fi
+    # if sed --help | grep "sed \(GNU sed\)" > /dev/null 2>%1 ; then
+    #   sed -i "/^$_target:$_workspace:.*$/d" $WORKING_DIRECTORY_FILE
+    # else
+    #   sed -i "" "/^$_target:$_workspace:.*$/d" $WORKING_DIRECTORY_FILE
+    # fi
   fi
 
   # Add it to the working directory file
