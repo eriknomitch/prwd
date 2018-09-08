@@ -111,14 +111,14 @@ function gw()
   local _workspace=0
   local _list_target=false
 
-  # Handle --list-target if we just want to list the 
+  # Handle --list-target if we just want to list the
   # target directory and not actually cd there.
   if [[ $_target == "--list-target" ]] ; then
     shift
     _target=$1
     _list_target=true
   fi
-  
+
   # Default to 0 if target was not passed
   if [[ -z $_target ]] ; then
     _target=0
@@ -130,7 +130,7 @@ function gw()
   fi
 
   if [[ -e $WORKING_DIRECTORY_FILE ]] ; then
-   
+
     local _directory=`_get_persistent_working_directory $_target $_workspace`
 
     if ( $_list_target ) ; then
@@ -148,7 +148,7 @@ function gw()
       if ( `(command -v g >/dev/null 2>&1)` ) ; then
         g
       fi
-      
+
     else
       cd $_directory
     fi
