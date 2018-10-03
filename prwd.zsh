@@ -5,7 +5,7 @@
 # ------------------------------------------------
 # GLOBALS ----------------------------------------
 # ------------------------------------------------
-WORKING_DIRECTORY_FILE=$HOME/.zsh-wd
+WORKING_DIRECTORY_FILE=$HOME/.prwd
 
 # If the user has not set PRWD_BIND_TO_WORKSPACE, default to false.
 if [[ -z $PRWD_BIND_TO_WORKSPACE ]] ; then
@@ -49,7 +49,7 @@ function _get_persistent_working_directory()
   local _target=$1
   local _workspace=$2
 
-  cat $WORKING_DIRECTORY_FILE | grep -E "^$_target|$_workspace$" | sed "s/^$_target|$_workspace|//"
+  cat $WORKING_DIRECTORY_FILE | grep -E "^$_target|$_workspace|" | sed "s/^$_target|$_workspace|//"
 }
 
 # ------------------------------------------------
