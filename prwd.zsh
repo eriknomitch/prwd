@@ -49,7 +49,7 @@ function _get_persistent_working_directory()
   local _target=$1
   local _workspace=$2
 
-  cat $WORKING_DIRECTORY_FILE | grep -E "^$_target|$_workspace|" | sed "s/^$_target|$_workspace|//"
+  cat $WORKING_DIRECTORY_FILE | grep -E "^$_target,$_workspace," | sed "s/^$_target,$_workspace,//"
 }
 
 # ------------------------------------------------
@@ -88,19 +88,19 @@ function sw()
 
   # Destroy the target if it exists
   if [[ -e $WORKING_DIRECTORY_FILE ]] ; then
-    sed -i "/^$_target|$_workspace|.*$/d" $WORKING_DIRECTORY_FILE
+    sed -i "/^$_target,$_workspace,.*$/d" $WORKING_DIRECTORY_FILE
 
     # OS X sed is different and takes a preliminary "backup" arg
     # but the user could have GNU sed installed.
     # if sed --help | grep "sed \(GNU sed\)" > /dev/null 2>%1 ; then
-    #   sed -i "/^$_target|$_workspace|.*$/d" $WORKING_DIRECTORY_FILE
+    #   sed -i "/^$_target,$_workspace,.*$/d" $WORKING_DIRECTORY_FILE
     # else
-    #   sed -i "" "/^$_target|$_workspace|.*$/d" $WORKING_DIRECTORY_FILE
+    #   sed -i "" "/^$_target,$_workspace,.*$/d" $WORKING_DIRECTORY_FILE
     # fi
   fi
 
   # Add it to the working directory file
-  echo "$_target|$_workspace|$PWD" >> $WORKING_DIRECTORY_FILE
+  echo "$_target,$_workspace,$PWD" >> $WORKING_DIRECTORY_FILE
 
   lw -c
 }
@@ -182,7 +182,7 @@ function _ensure_default_working_directory_file()
 {
   # Create the file and set a default working directory (HOME)
   if [[ ! -f $WORKING_DIRECTORY_FILE ]] ; then
-    echo "0|0|$HOME" >> $WORKING_DIRECTORY_FILE
+    echo "0,0,$HOME" >> $WORKING_DIRECTORY_FILE
   fi
 }
 
