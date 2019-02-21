@@ -88,15 +88,21 @@ function sw()
 
   # Destroy the target if it exists
   if [[ -e $WORKING_DIRECTORY_FILE ]] ; then
-    sed -i "/^$_target,$_workspace,.*$/d" $WORKING_DIRECTORY_FILE
 
-    # OS X sed is different and takes a preliminary "backup" arg
+    # macOS sed is different and takes a preliminary "backup" arg
     # but the user could have GNU sed installed.
-    # if sed --help | grep "sed \(GNU sed\)" > /dev/null 2>%1 ; then
-    #   sed -i "/^$_target,$_workspace,.*$/d" $WORKING_DIRECTORY_FILE
-    # else
-    #   sed -i "" "/^$_target,$_workspace,.*$/d" $WORKING_DIRECTORY_FILE
-    # fi
+    #
+    # The macOS sed returns an error with the --help flag passed.
+    if sed --help > /dev/null 2>&1; then
+      # GNU sed
+      sed -i "/^$_target,$_workspace,.*$/d" $WORKING_DIRECTORY_FILE
+    else
+      # macOS sed requires a hack. This .tmp file has to be created for
+      # in-place to work.
+      sed -i.tmp "/^$_target,$_workspace,.*$/d" $WORKING_DIRECTORY_FILE
+
+      test -f $WORKING_DIRECTORY_FILE.tmp && rm $WORKING_DIRECTORY_FILE.tmp
+    fi
   fi
 
   # Add it to the working directory file
