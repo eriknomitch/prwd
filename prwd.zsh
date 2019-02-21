@@ -5,7 +5,7 @@
 # ------------------------------------------------
 # GLOBALS ----------------------------------------
 # ------------------------------------------------
-WORKING_DIRECTORY_FILE=$HOME/.prwd
+WORKING_DIRECTORY_FILE=$HOME/.prwd-directories
 
 # If the user has not set PRWD_BIND_TO_WORKSPACE, default to false.
 if [[ -z $PRWD_BIND_TO_WORKSPACE ]] ; then
