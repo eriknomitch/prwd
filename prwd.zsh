@@ -38,9 +38,9 @@ function _current_workspace()
   # If the config is set to bind to a workspace...
   elif ( $PRWD_BIND_TO_WORKSPACE ) ; then
     wmctrl -d | grep "*" | awk '{print $1}'
-  # Otherwise we're "always on 0"
+  # Otherwise we're "always on 'none'"
   else
-    echo 0
+    echo "none"
   fi
 }
 
@@ -79,7 +79,7 @@ function sw()
   local _workspace=$2
 
   if [[ -z $_target ]] ; then
-    _target=0
+    _target="none"
   fi
 
   if [[ -z $_workspace ]] ; then
@@ -114,7 +114,7 @@ function sw()
 function gw()
 {
   local _target=$1
-  local _workspace=0
+  local _workspace="none"
   local _list_target=false
 
   # Handle --list-target if we just want to list the
@@ -127,7 +127,7 @@ function gw()
 
   # Default to 0 if target was not passed
   if [[ -z $_target ]] ; then
-    _target=0
+    _target="none"
   fi
 
   # Default to 0 if we aren't binding to workspaces
