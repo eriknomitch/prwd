@@ -108,6 +108,9 @@ function sw()
   # Add it to the working directory file
   echo "$_target,$_workspace,$PWD" >> $WORKING_DIRECTORY_FILE
 
+  lw
+  echo
+
   lw -c
 }
 
